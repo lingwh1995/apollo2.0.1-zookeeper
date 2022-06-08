@@ -43,6 +43,8 @@
         set password_dev="123456"
         #dev环境meta地址
         set meta_dev="http://localhost:8080/"
+        #dev环境zookeeper地址
+        set zookeeper_dev="192.168.0.2:2181"
 
         #pro环境数据库连接信息
         set url_pro="192.168.0.3:3306"
@@ -54,20 +56,23 @@
         set configService_port_pro="8081"
         #pro环境meta地址
         set meta_pro="http://localhost:8081/"
+        #pro环境zookeeper地址
+        set zookeeper_pro="192.168.0.3:2181"
 
         #portal端口
         set portal_port="8070"
 
         #启动dev环境configService
-        start "configService-dev" java -Dapollo_profile=github -Dspring.datasource.url=jdbc:mysql://%url_dev%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_dev% -Dspring.datasource.password=%password_dev% -Dlogging.file.name=.\logs\apollo-configservice-dev.log -jar .\apollo-configservice-2.0.1-dev.jar
+        start "configService-dev" java -Dapollo_profile=github -Dspring.cloud.zookeeper.connect-string=%zookeeper_dev% -Dspring.datasource.url=jdbc:mysql://%url_dev%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_dev% -Dspring.datasource.password=%password_dev% -Dlogging.file.name=.\logs\apollo-configservice-dev.log -jar .\apollo-configservice-2.0.1-dev.jar
         #启动dev环境adminService
-        start "adminService-dev" java -Dapollo_profile=github -Dspring.datasource.url=jdbc:mysql://%url_dev%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_dev% -Dspring.datasource.password=%password_dev% -Dlogging.file.name=.\logs\apollo-adminservice-dev.log -jar .\apollo-adminservice-2.0.1-dev.jar
+        start "adminService-dev" java -Dapollo_profile=github -Dspring.cloud.zookeeper.connect-string=%zookeeper_dev% -Dspring.datasource.url=jdbc:mysql://%url_dev%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_dev% -Dspring.datasource.password=%password_dev% -Dlogging.file.name=.\logs\apollo-adminservice-dev.log -jar .\apollo-adminservice-2.0.1-dev.jar
         #启动pro环境configService
-        start "configService-pro" java -Dapollo_profile=github -Dspring.cloud.zookeeper.connect-string=192.168.0.3:2181 -DServer.port=%configService_port_pro% -Dspring.datasource.url=jdbc:mysql://%url_pro%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_pro% -Dspring.datasource.password=%password_pro% -Dlogging.file.name=.\logs\apollo-configservice-dev.log -jar .\apollo-configservice-2.0.1-pro.jar
+        start "configService-pro" java -Dapollo_profile=github -Dspring.cloud.zookeeper.connect-string=%zookeeper_pro% -DServer.port=%configService_port_pro% -Dspring.datasource.url=jdbc:mysql://%url_pro%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_pro% -Dspring.datasource.password=%password_pro% -Dlogging.file.name=.\logs\apollo-configservice-dev.log -jar .\apollo-configservice-2.0.1-pro.jar
         #启动pro环境adminService
-        start "adminService-pro" java -Dapollo_profile=github  -Dspring.cloud.zookeeper.connect-string=192.168.0.3:2181 -DServer.port=%adminService_port_pro%  -Dspring.datasource.url=jdbc:mysql://%url_pro%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_pro% -Dspring.datasource.password=%password_pro% -Dlogging.file.name=.\logs\apollo-adminservice-dev.log -jar .\apollo-adminservice-2.0.1-pro.jar
+        start "adminService-pro" java -Dapollo_profile=github  -Dspring.cloud.zookeeper.connect-string=%zookeeper_pro% -DServer.port=%adminService_port_pro%  -Dspring.datasource.url=jdbc:mysql://%url_pro%/ApolloConfigDB?characterEncoding=utf8 -Dspring.datasource.username=%username_pro% -Dspring.datasource.password=%password_pro% -Dlogging.file.name=.\logs\apollo-adminservice-dev.log -jar .\apollo-adminservice-2.0.1-pro.jar
         #启动portal
         start "ApolloPortal" java -Dapollo_profile=github,auth -Ddev_meta=%meta_dev% -Dpro_meta=%meta_pro% -Dserver.port=%portal_port% -Dspring.datasource.url=jdbc:mysql://%url_dev%/ApolloPortalDB?characterEncoding=utf8 -Dspring.datasource.username=%username_dev% -Dspring.datasource.password=%password_dev% -Dlogging.file.name=.\logs\apollo-portal.log -jar .\apollo-portal-2.0.1.jar
+
 8.添加系统参数
     访问http://localhost:8070/,进入Apollo配置界面
     	1>.登录用户名/密码:	apollo/admin
