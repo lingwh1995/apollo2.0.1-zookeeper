@@ -87,6 +87,7 @@
 	Apollo配置中心: http://localhost:8070/
 	    登录用户名/密码: apollo/admin
 10.特別注意事项
-    1.dev环境和pro环境需要不同的数据库地址
-    2.dev环境和pro环境需要不同的Zookeeper地址
+    1.dev环境和pro环境需要不同的数据库地址,
+        即需要两套Mysql环境,第一套中有apolloconfigdb、apolloportaldb两个库,第二套 环境中只有apolloconfigdb这个库
+    2.dev环境和pro环境需要不同的Zookeeper地址,即需要两套Zookeeper环境
     3.如果启动后多环境现实不正常,直接重启下Portal,再刷新页面即可
