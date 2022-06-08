@@ -17,8 +17,8 @@
 4.修改build.sh/build.bat，将config-service和admin-service的maven编译命令更改为
     mvn clean package -Pgithub -DskipTests -pl apollo-configservice,apollo-adminservice -am -Dapollo_profile=github,zookeeper-discovery -Dspring_datasource_url=$apollo_config_db_url -Dspring_datasource_username=$apollo_config_db_username -Dspring_datasource_password=$apollo_config_db_password
 5.分别修改apollo-configservice和apollo-adminservice安装包中config目录下的application-github.properties，配置zookeeper服务器地址
+    #注意,核心是将spring.cloud.zookeeper.connect-string这个配置进来,后面的连接信息可以在外面直接覆盖
     spring.cloud.zookeeper.connect-string=127.0.0.1:2181
-    mvn clean package -Pgithub -DskipTests -pl apollo-configservice,apollo-adminservice -am -Dapollo_profile=github,consul-discovery -Dspring_datasource_url=$apollo_config_db_url -Dspring_datasource_username=$apollo_config_db_username -Dspring_datasource_password=$apollo_config_db_password
 6.执行apollo/scripts/build.bat,执行完成后可以得到下面三个jar包(最好是重命名以下)
 	apollo/apollo-adminservice/target/apollo-adminservice-2.0.1-SNAPSHOT.jar->复制一份分别命名为
 	    apollo-adminservice-2.0.1-dev.jar
