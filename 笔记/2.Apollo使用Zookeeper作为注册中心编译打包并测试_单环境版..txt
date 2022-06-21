@@ -19,6 +19,7 @@
 	>.创建名称为Apollo2.0.1_zookeeper_dev的文件夹(版本号以实际为准)
 	2>.把三个jar包放入文件夹中
 	3>.创建一个logs文件夹,里面存放日志文件,日志文件名称分别是apollo-configservice.log、apollo-adminservice.log、apollo-portal.log
+	    注意:不用创建这三个文件,程序运行会自动创建这三个文件
 	4>.编写一次启动三个jar的bat脚本
 
         set url="192.168.0.2:3306"

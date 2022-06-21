@@ -5,3 +5,7 @@
     #注意,核心是将spring.cloud.zookeeper.connect-string这个配置进来,后面的连接信息可以在外面直接覆盖
     spring.cloud.zookeeper.connect-string=127.0.0.1:2181
 4.运行build.sh/build.bat
+5.在下面三个位置找到编译好的jar包
+    apollo-adminservice/target
+    apollo-configservice/target
+    apollo-portal/target
